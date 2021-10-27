@@ -3,25 +3,25 @@ Q: WAP to construct the relevant tables and printing the optimal parenthesizatio
 */
 
 #include <stdio.h>
+#include <time.h>
 
 long inf = 1e9;
 
-void printParenthesis(int i, int j, int n, int *bracket, char *name) {
+void printParenthesis(int i, int j, int n, int *bracket, char *name)
+{
     if (i == j)
     {
         printf("%c", (*name)++);
         return;
     }
     printf("(");
-    printParenthesis(i, *((bracket + i * n) + j), n,
-                     bracket, name);
-
-    printParenthesis(*((bracket + i * n) + j) + 1, j, n,
-                     bracket, name);
+    printParenthesis(i, *((bracket + i * n) + j), n, bracket, name);
+    printParenthesis(*((bracket + i * n) + j) + 1, j, n, bracket, name);
     printf(")");
 }
 
-void matrixChainOrder(int p[], int n) {
+void matrixChainOrder(int p[], int n)
+{
     int m[n][n];
     int bracket[n][n];
     for (int i = 1; i < n; i++)
@@ -50,8 +50,14 @@ void matrixChainOrder(int p[], int n) {
     printf("\nOptimal Cost is : %d", m[1][n - 1]);
 }
 
-void main() {
+void main()
+{
     int arr[] = {2, 2, 4, 2, 6};
     int n = sizeof(arr) / sizeof(arr[0]);
+    clock_t time;
+    time = clock();
     matrixChainOrder(arr, n);
+    time = clock() - time;
+    double time_taken = ((double)time) / CLOCKS_PER_SEC;
+    printf("\n\nTotal time = %f\n", time_taken);
 }

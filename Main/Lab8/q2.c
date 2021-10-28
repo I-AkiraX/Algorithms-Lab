@@ -56,7 +56,7 @@ void main()
     char X[10]; // "10010101";
     char Y[10]; // "010110110";
     scanf("%s",X);
-    scanf("%s",Y);
+    scanf("%s",Y);
     clock_t time;
     time = clock();
     int m = strlen(X);
